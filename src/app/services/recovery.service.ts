@@ -19,8 +19,8 @@ export class RecoveryService {
   public PATHS: Object;
 
   public apiURI = {
-    'btc44/livenet': 'https://insight.bitpay.com/api/',
-    'btc/livenet': 'https://insight.bitpay.com/api/',
+    'btc44/livenet': 'https://bitlox.io/api/',
+    'btc/livenet': 'https://bitlox.io/api/',
     'testnet': 'https://test-insight.bitpay.com/api/',
     'bch/livenet': 'https://bch-insight.bitpay.com/api/',
     'bch44/livenet': 'https://bch-insight.bitpay.com/api/',
