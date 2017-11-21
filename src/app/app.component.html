@@ -4,12 +4,12 @@
     <div class="header-center">
       <h3 class="header-title">Recovery Tool</h3>
       <div class="repository-link">
-        <a href="https://github.com/bitpay/copay-recovery" target="blank">
+        <a href="https://github.com/bitlox/copay-recovery" target="blank">
           <img src="assets/img/github.png" alt="Github">
         </a>
       </div>
     </div>
-    <img class="copay-logo" src="assets/img/copay-logo-negative.svg" alt="Copay">
+    <img class="bitpay-logo" src="assets/img/bitpay-logo-negative.svg" alt="Bitpay">
   </div>
 </div>
 <div [hidden]="!showLoadingSpinner" class="no-clickable-background">
@@ -60,17 +60,21 @@
 
           <div class="form-group col-sm-6 col-xs-12">
             <label for="chain">Chain: Bitcoin</label>
-            <span *ngIf="chain == 'btc/livenet'">livenet</span>
+            <span *ngIf="chain == 'btc/livenet'">BTC livenet</span>
+            <span *ngIf="chain == 'btc44/livenet'">BTC livenet BIP44 Firmware v66+</span>
             <span *ngIf="chain == 'btc/testnet'">testnet</span>
             <span *ngIf="chain == 'bch/livenet'">Cash livenet</span>
+            <span *ngIf="chain == 'bch44/livenet'">Cash livenet BIP44 Firmware v66+</span>
             <div class="chain-select">
               <select class="form-control" id="chain" name="chain" [(ngModel)]="chain">
                 <option *ngFor="let chain of availableChains" [ngValue]="chain">{{chain}}</option>
               </select>
               <div class="chain-logo-container">
                 <img src="assets/img/icon-btc.svg" class="chain-logo" *ngIf="chain == 'btc/livenet'">
+                <img src="assets/img/icon-btc.svg" class="chain-logo" *ngIf="chain == 'btc44/livenet'">
                 <img src="assets/img/icon-testnet.svg" class="chain-logo" *ngIf="chain == 'btc/testnet'">
                 <img src="assets/img/icon-bch.svg" class="chain-logo" *ngIf="chain == 'bch/livenet'">
+                <img src="assets/img/icon-bch.svg" class="chain-logo" *ngIf="chain == 'bch44/livenet'">
               </div>
             </div>
           </div>
@@ -121,8 +125,8 @@
     </div>
 
     <button type="submit" [disabled]="!processInputsForm.form.valid  || showLoadingSpinner || !termsAccepted" class="btn btn-primary btn-lg btn-block">
-      <span *ngIf="chain == 'btc/livenet' || chain == 'btc/testnet'">Scan BTC Wallet</span>
-      <span *ngIf="chain == 'bch/livenet'">Scan BCH Wallet</span>
+      <span *ngIf="chain == 'btc/livenet' || chain == 'btc44/livenet' || chain == 'btc/testnet'">Scan BTC Wallet</span>
+      <span *ngIf="chain == 'bch/livenet' || chain == 'bch44/livenet'">Scan BCH Wallet</span>
     </button>
   </form>
 

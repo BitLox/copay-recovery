@@ -19,10 +19,12 @@ export class RecoveryService {
   public PATHS: Object;
 
   public apiURI = {
+    'btc44/livenet': 'https://insight.bitpay.com/api/',
     'btc/livenet': 'https://insight.bitpay.com/api/',
-    'btc/testnet': 'https://test-insight.bitpay.com/api/',
-    //'bch/livenet': 'https://bch-insight.bitpay.com/api/,'
-    'bch/livenet': 'https://blockdozer.com/insight-api/',
+    'testnet': 'https://test-insight.bitpay.com/api/',
+    'bch/livenet': 'https://bch-insight.bitpay.com/api/',
+    'bch44/livenet': 'https://bch-insight.bitpay.com/api/',
+//   'bch/livenet': 'https://blockdozer.com/insight-api/',
   };
 
   constructor(private http: HttpClient) {
@@ -30,8 +32,10 @@ export class RecoveryService {
       'BIP45': ["m/45'/2147483647/0", "m/45'/2147483647/1"],
       'BIP44': {
         'testnet': ["m/44'/1'/0'/0", "m/44'/1'/0'/1"],
-        'livenet': ["m/44'/0'/0'/0", "m/44'/0'/0'/1"],
-        'bch/livenet': ["m/44'/0'/0'/0", "m/44'/0'/0'/1"]
+        'btc44/livenet': ["m/44'/0'/0'/0", "m/44'/0'/0'/1"],
+        'livenet': ["m/0'/0", "m/0'/1"],
+        'bch44/livenet': ["m/44'/0'/0'/0", "m/44'/0'/0'/1"],
+        'bch/livenet': ["m/0'/0", "m/0'/1"]
       },
     }
   }
@@ -174,7 +178,11 @@ export class RecoveryService {
 
     if (coin == 'btc') {
       self.bitcore = bitcoreLib;
+    } else if (coin == 'btc44') {
+      self.bitcore = bitcoreLib;
     } else if (coin == 'bch') {
+      self.bitcore = bitcoreLibCash;
+    } else if (coin == 'bch44') {
       self.bitcore = bitcoreLibCash;
     } else {
       throw new Error("Unknown coin " + coin);

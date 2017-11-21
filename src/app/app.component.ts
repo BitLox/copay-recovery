@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
       gap: this.addressGap
     };
     this.availableOptions = [1, 2, 3, 4, 5, 6];
-    this.availableChains = ['btc/livenet', 'btc/testnet', 'bch/livenet'];
+    this.availableChains = ['btc/livenet', 'btc44/livenet', 'btc/testnet', 'bch/livenet', 'bch44/livenet'];
     this.fee = 0.001;
     this.signaturesNumber = this.availableOptions[0];
     this.copayersNumber = this.availableOptions[0];
@@ -102,14 +102,22 @@ export class AppComponent implements OnInit {
       }
     });
 
-    if (this.chain.match(/bch/)) {
+    if (this.chain.match(/bch44/)) {
+      this.network = 'livenet';
+      this.coin = 'bch44';
+      this.fee = 0.00001;
+    } else if (this.chain.match(/bch/)) {
       this.network = 'livenet';
       this.coin = 'bch';
       this.fee = 0.00001;
-    } else {
-      this.network = this.chain.replace('btc/', '');
+    } else if (this.chain.match(/btc44/)) {
+      this.network = 'livenet';
+      this.coin = 'btc44';
+      this.fee = 0.0003;
+    } else if (this.chain.match(/btc/)) {
+      this.network = 'livenet';
       this.coin = 'btc';
-      this.fee = 0.001;
+      this.fee = 0.0003;
     }
 
     try {
@@ -200,10 +208,16 @@ export class AppComponent implements OnInit {
       case 'btc/livenet':
         url = 'https://insight.bitpay.com/tx/';
         break;
+      case 'btc44/livenet':
+        url = 'https://insight.bitpay.com/tx/';
+        break;
       case 'btc/testnet':
         url = 'https://test-insight.bitpay.com/tx/';
         break;
       case 'bch/livenet':
+        url = 'https://bch-insight.bitpay.com/tx/';
+        break;
+      case 'bch44/livenet':
         url = 'https://bch-insight.bitpay.com/tx/';
         break;
       default:
